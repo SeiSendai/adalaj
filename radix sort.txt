@@ -1,0 +1,51 @@
+FUNGSI getMaxLength(arr):
+    maxLength = 0
+    UNTUK SETIAP string s DALAM arr:
+        JIKA panjang(s) > maxLength:
+            maxLength = panjang(s)
+    KEMBALIKAN maxLength
+
+FUNGSI countingSort(arr, place):
+    maxChar = 256
+    output = ARRAY_KOSONG(panjang(arr))
+    count = ARRAY_KOSONG(maxChar, 0)
+
+    UNTUK SETIAP string s DALAM arr:
+        ch = s[panjang(s) - 1 - place] JIKA place < panjang(s) ELSE '\0'
+        count[ch] += 1
+
+    UNTUK i DARI 1 KE maxChar - 1:
+        count[i] += count[i - 1]
+
+    UNTUK i DARI panjang(arr) - 1 KE 0:
+        ch = arr[i][panjang(arr[i]) - 1 - place] JIKA place < panjang(arr[i]) ELSE '\0'
+        output[count[ch] - 1] = arr[i]
+        count[ch] -= 1
+
+    arr = output
+
+FUNGSI radixSort(arr):
+    maxLength = getMaxLength(arr)
+    UNTUK place DARI 0 KE maxLength - 1:
+        countingSort(arr, place)
+
+FUNGSI splitSentence(sentence):
+    words = sentence.split()
+    KEMBALIKAN words
+
+FUNGSI joinWords(words):
+    sentence = " ".join(words)
+    KEMBALIKAN sentence
+
+FUNGSI main():
+    sentence = "mari pergi"
+    words = splitSentence(sentence)
+
+    UNTUK SETIAP word DALAM words:
+        temp = [word]
+        radixSort(temp)
+        word = temp[0]
+
+    sortedSentence = joinWords(words)
+    CETAK "Kalimat sebelum diurutkan:", sentence
+    CETAK "Kalimat setelah diurutkan:", sortedSentence

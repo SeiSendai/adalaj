@@ -1,0 +1,15 @@
+FUNGSI binary_search(arr, target):
+    low = 0
+    high = panjang(arr) - 1
+
+    SELAMA low <= high:
+        mid = (low + high) // 2
+
+        JIKA arr[mid] == target:
+            KEMBALIKAN mid  // Kata ditemukan
+        JIKA arr[mid] < target:
+            low = mid + 1
+        LAINNYA:
+            high = mid - 1
+
+    KEMBALIKAN -1  // Kata tidak ditemukan
